@@ -25,6 +25,7 @@ class Products {
   }
 
   delete(_id) {
+    Products.deleteOne({_id})
   }
 
   //TODO: figure out WTF this is
