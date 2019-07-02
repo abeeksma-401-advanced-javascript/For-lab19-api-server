@@ -1,8 +1,6 @@
 'use strict';
 
-const Q = require('@nmq/q');
-
-const dbQ = new Q('database');
+const Q = require('@nmq/q/client');
 
 const express = require('express');
 const authRouter = express.Router();
@@ -20,7 +18,7 @@ authRouter.post('/signup', (req, res, next) => {
       res.set('token', req.token);
       res.cookie('auth', req.token);
       res.send(req.token);
-      dbQ.publish('database', 'auth', user);
+      Q.publish('database', 'auth', user);
     })
     .catch(next);
 });

@@ -1,8 +1,6 @@
 'use strict';
 
-const Q = require('@nmq/q');
-
-const dbQ = new Q('database');
+const Q = require('@nmq/q/client');
 
 const Category = require('./categories-schema');
 
@@ -10,10 +8,14 @@ class Categories {
 
   get(_id) {
     //checks for a 24 character id containing 0-9 or a-z as characters (case insensitive)
-    if(!/^[0-9a-z]{24}$/i.test(_id))
+    if(!/^[0-9a-z]{24}$/i.test(_id)){
       return Promise.resolve(null);
-    dbQ.publish('database', 'read', _id);
-    return Category.findOne(_id);
+    }
+    else {
+      let category = Category.findOne(_id);
+      Q.publish('database', 'read', _id);
+      return category;
+    }
   }
 
   getAll(){
@@ -22,7 +24,7 @@ class Categories {
   
   post(record) {
     var category = new Category (record);
-    dbQ.publish('database', 'create', category);
+    Q.publish('database', 'create', category);
     return category.save();
   }
 
@@ -30,13 +32,13 @@ class Categories {
   async put(_id, record){
     let updatedCat = await Category.findOne({_id});
     Object.assign(updatedCat, record);
-    dbQ.publish('database', 'update', updatedCat);
+    Q.publish('database', 'update', updatedCat);
     await updatedCat.save();
   }
     
   //TODO: DESTROY!!!!  
   delete(_id) {
-    dbQ.publish('database', 'delete', _id);
+    Q.publish('database', 'delete', _id);
     Categories.deleteOne({_id});
   }
 
