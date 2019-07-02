@@ -6,7 +6,7 @@ const supergoose = require('../../supergoose');
 beforeAll(supergoose.startDB);
 afterAll(supergoose.stopDB);
 
-const mockRequest = supergoose.server(server)
+const mockRequest = supergoose.server(server);
 
 const Role = require('../../../src/auth/roles-model');
 const User = require('../../../src/auth/users-model');
@@ -36,15 +36,15 @@ beforeAll(async () => {
 describe('api route auth', () => {
   it('recieves a 401 if not authenticated', () => {
     return mockRequest
-    .get('/categories')
-    .expect(401);
+      .get('/categories')
+      .expect(401);
   });
 
   it('recieves 401 unauthorized if user doest not have proper authorization level', () => {
     return mockRequest
-    .post('/categories')
-    .set('Authorization', `Bearer ${users.user.generateToken()}`)
-    .expect(401);
+      .post('/categories')
+      .set('Authorization', `Bearer ${users.user.generateToken()}`)
+      .expect(401);
   });
 
 }); 

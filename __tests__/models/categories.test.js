@@ -10,7 +10,7 @@ const mongooseOptions = {
 const MONGODB_URI = process.env.MONGODB_URI ||
   'mongodb://localhost/lab15apibuild';
   
-const Categories = require('../../src/models/categories')
+const Categories = require('../../src/models/categories');
 
 
 describe('Categories Repository', () => {

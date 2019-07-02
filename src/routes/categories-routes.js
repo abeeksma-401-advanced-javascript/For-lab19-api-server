@@ -2,7 +2,7 @@
 
 const express = require('express');
 const catRouter = express.Router();
-const auth = require('../auth/middleware')
+const auth = require('../auth/middleware');
 
 const Categories = require('../models/categories');
 const categories = new Categories();

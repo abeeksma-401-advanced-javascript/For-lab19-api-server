@@ -7,25 +7,25 @@ class Products {
 
   get(_id) {
     if(!/^[0-9a-z]{24}$/i.test(_id)){
-    return Promise.resolve(null)
+      return Promise.resolve(null);
     }
-    return Category.findOne(_id);
+    return Products.findOne(_id);
   }
   
   post(entry) {
     var product = new Product (entry);
-    console.log(`this is the newly posted Product ${product}`)
+    console.log(`this is the newly posted Product ${product}`);
     return product.save();
   }
 
   async put(_id, entry) {
-    let updatedProd = await product.findOne({_id});
+    let updatedProd = await Products.findOne({_id});
     Object.assign(updatedProd, entry);
     await updatedProd.save();
   }
 
   delete(_id) {
-    Products.deleteOne({_id})
+    Products.deleteOne({_id});
   }
 
   //TODO: figure out WTF this is

@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 const MongoMemoryServer = require('mongodb-memory-server').default;
 const supertest = require('supertest');
 
-const Categories = require('../src/models/categories')
+const Categories = require('../src/models/categories');
 let catRepository = new Categories (); 
 
 let mongoServer;
@@ -33,7 +33,7 @@ supergoose.startDB = async () => {
   
   const mongooseOptions = {
     useNewUrlParser:true,
-    useCreateIndex: true
+    useCreateIndex: true,
   };
   
   await mongoose.connect(mongoUri, mongooseOptions, (err) => {

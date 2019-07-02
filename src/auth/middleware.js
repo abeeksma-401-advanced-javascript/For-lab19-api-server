@@ -55,7 +55,7 @@ module.exports = (capability) => {
       next({
         status: 401,
         statusMessage: 'Unauthorized',
-        message: 'Invalid Username/Password'
+        message: 'Invalid Username/Password',
       });
     }
 

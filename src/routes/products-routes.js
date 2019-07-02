@@ -6,7 +6,7 @@ const prodRouter = express.Router();
 const Products = require('../models/products');
 const products = new Products();
 
-const auth = require('../auth/middleware')
+const auth = require('../auth/middleware');
 
 
 prodRouter.get('/products', auth(), getProducts);

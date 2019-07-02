@@ -22,7 +22,7 @@ users.virtual('acl', {
   ref: 'roles', 
   localField: 'role',
   foreignField: 'role',
-  justOne: true
+  justOne: true,
 });
 
 users.pre('save', function() {
@@ -104,15 +104,15 @@ users.methods.generateToken = function(type) {
    
   let signedToken = jwt.sign(token, SECRET, options);
 
-  console.log("I MAKE TOKEN", signedToken);
+  console.log('I MAKE TOKEN', signedToken);
   return signedToken;
 };
 
 users.methods.can = function(capability) {
   if (!this.acl || !this.acl.capabilities)
-  return false;
+    return false;
 
-return this.acl.capabilities.includes(capability);
+  return this.acl.capabilities.includes(capability);
   //return capabilities[this.role].includes(capability);
 };
 
